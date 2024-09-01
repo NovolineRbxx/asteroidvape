@@ -18,7 +18,7 @@
 
 ]]
 
-local asteroid_load = tick();
+
 local GuiLibrary = shared.GuiLibrary
 local playersService = game:GetService("Players")
 local httpService = game:GetService('HttpService')
