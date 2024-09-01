@@ -11,7 +11,7 @@
                                                                                                  
 
 
--- ------------------> credits -- > - copium/luc for original velo i turned into asteroid
+ ------------------> credits -- >  copium/luc for original velo i turned into asteroid
 
                                                          
                                          
