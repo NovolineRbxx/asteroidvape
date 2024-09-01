@@ -107,7 +107,7 @@ local function displayErrorPopup(text, funclist)
 	local prompt = ErrorPrompt.new("Default")
 	prompt._hideErrorCode = true
 	local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-	prompt:setErrorTitle("Vape")
+	prompt:setErrorTitle("Asteroid")
 	local funcs
 	if funclist then 
 		funcs = {}
@@ -145,7 +145,7 @@ local function vapeGithubRequest(scripturl)
 				displayErrorPopup("The connection to github is taking a while, Please be patient.")
 			end
 		end)
-		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/NovolineRbxx/asteroidvape/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		if not suc or res == "404: Not Found" then
 			displayErrorPopup("Failed to connect to github : vape/"..scripturl.." : "..res)
 			error(res)
@@ -184,7 +184,7 @@ local function downloadVapeAsset(path)
 	return getcustomasset(path) 
 end
 
-assert(not shared.VapeExecuted, "Vape Already Injected")
+assert(not shared.VapeExecuted, "Asteroid Already Injected")
 shared.VapeExecuted = true
 
 for i,v in pairs({baseDirectory:gsub("/", ""), "vape", "vape/Libraries", "vape/CustomModules", "vape/Profiles", baseDirectory.."Profiles", "vape/assets"}) do 
@@ -300,9 +300,9 @@ local World = GuiLibrary.CreateWindow({
 	Icon = "vape/assets/WorldIcon.png", 
 	IconSize = 16
 })
-local Velocity = GuiLibrary.CreateWindow({
-	Name = "Velocity", 
-	Icon = "vape/assets/RadarIcon2.png", 
+local Asteroid = GuiLibrary.CreateWindow({
+	Name = "Asteroid", 
+	Icon = "vape/assets/TargetIcon2.png", 
 	IconSize = 17
 })
 local Friends = GuiLibrary.CreateWindow2({
@@ -352,9 +352,9 @@ GUI.CreateButton({
 	IconSize = 16
 })
 GUI.CreateButton({
-	Name = "Velocity", 
-	Function = function(callback) Velocity.SetVisible(callback) end, 
-	Icon = "vape/assets/RadarIcon2.png", 
+	Name = "Asteroid", 
+	Function = function(callback) Asteroid.SetVisible(callback) end, 
+	Icon = "vape/assets/TargetIcon2.png", 
 	IconSize = 17
 })
 GUI.CreateDivider("MISC")
@@ -1809,7 +1809,7 @@ local teleportConnection = playersService.LocalPlayer.OnTeleport:Connect(functio
 			if shared.VapeDeveloper then 
 				loadstring(readfile("vape/NewMainScript.lua"))() 
 			else 
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/NewMainScript.lua", true))() 
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/NovolineRbxx/asteroidvape/"..readfile("vape/commithash.txt").."/NewMainScript.lua", true))() 
 			end
 		]]
 		if shared.VapeDeveloper then
@@ -1912,7 +1912,7 @@ GUISettings.CreateButton2({
 			RenderWindow = 4,
 			UtilityWindow = 5,
 			WorldWindow = 6,
-                        VelocityWindow = 7,
+                        AsteroidWindow = 7,
 			FriendsWindow = 8,
 			TargetsWindow = 9,
 			ProfilesWindow = 10,
@@ -1959,19 +1959,19 @@ GeneralSettings.CreateButton2({
 	if isfile("vape/NewMainScript.lua") then
 		loadstring(readfile("vape/MainScript.lua"))()
 	else
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/Copiums/Velocity/main/NewMainScript.lua", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/NovolineRbxx/asteroidvape/main/NewMainScript.lua", true))()
 	end
 	end
 })
 GeneralSettings.CreateButton2({
-	Name = "UNINSTALL VELOCITY",
+	Name = "UNINSTALL ASTEROID",
 	Function = function() 
 	local commit = isfile("vape/commithash.txt") and readfile("vape/commithash.txt") or "main"
 	GuiLibrary.SelfDestruct()
 	if isfile("vape/NewMainScript.lua") then
 		loadstring(readfile("vape/MainScript.lua"))()
 	else
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..commit.."/MainScript.lua", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/NovolineRbxx/VapeV4ForRoblox/"..commit.."/MainScript.lua", true))()
 	end
 	end
 })
@@ -1982,7 +1982,7 @@ local function loadVape()
 			loadstring(readfile("vape/CustomModules/"..game.PlaceId..".lua"))()
 		else
 			if not shared.VapeDeveloper then
-				local suc, publicrepo = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/CustomModules/"..game.PlaceId..".lua") end)
+				local suc, publicrepo = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/NovolineRbxx/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/CustomModules/"..game.PlaceId..".lua") end)
 				if suc and publicrepo and publicrepo ~= "404: Not Found" then
 					writefile("vape/CustomModules/"..game.PlaceId..".lua", "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..publicrepo)
 					loadstring(readfile("vape/CustomModules/"..game.PlaceId..".lua"))()
@@ -2010,12 +2010,12 @@ local function loadVape()
 	ProfilesTextList.RefreshValues(profiles)
 	GUIbind.Reload()
 	TextGUIUpdate()
-        loadstring(game:HttpGet("https://sammz.pythonanywhere.com/retrieve/v1/velocity/fixedcheck.lua"))()
+        --[[loadstring(game:HttpGet("https://sammz.pythonanywhere.com/retrieve/v1/velocity/fixedcheck.lua"))()--]]
 	GuiLibrary.UpdateUI(GUIColorSlider.Hue, GUIColorSlider.Sat, GUIColorSlider.Value, true)
 	if not shared.VapeSwitchServers then
 		if BlatantModeToggle.Enabled then
 			pcall(function()
-				local frame = GuiLibrary.CreateNotification("Blatant Enabled", "Vape is now in Blatant Mode.", 5.5, "assets/WarningNotification.png")
+				local frame = GuiLibrary.CreateNotification("Blatant Enabled", "Asteroid is now in Blatant Mode.", 5.5, "assets/WarningNotification.png")
 				frame.Frame.Frame.ImageColor3 = Color3.fromRGB(236, 129, 44)
 			end)
 		end
